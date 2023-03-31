@@ -1,8 +1,19 @@
 # ETL pipeline for Web3 data  
 
-This project is designed to extract ERC20 token data from Web3 using the Etherscan API and create an ETL pipeline using Apache Airflow. The extracted data is scheduled to be fed into a local PostgreSQL database daily. The project involves technologies such as Docker, Airflow DAGs, PostgreSQL, and HDFS.  
+This project is designed to extract ERC20 token data from Web3 using the Etherscan API and create an ETL pipeline using Apache Airflow. The extracted data is scheduled to be fed into a local PostgreSQL database daily. The project involves technologies such as Docker, Airflow DAGs, PostgreSQL, and HDFS. Below is the screenshot of the data pipeline in action.  
+![image](https://user-images.githubusercontent.com/117455557/229133404-fe19a6b3-2545-4a31-b340-9726900ca8a7.png)  
 
-# Setting up the Environment  
+## Extraction  
+We extract data from the Ethereum blockchain using the Etherscan API, which provides access to a vast array of blockchain data, including ERC20 token transfers. The API is queried daily to retrieve the latest ERC20 token data.  
+
+## Transformation  
+Once the data is extracted, it is transformed using a series of tasks to clean, adjust and transpose the data. This ensures that the data is accurate, clean and readable for analysis. The transform tasks are implemented using Python scripts and executed using Apache Airflow.  
+
+## Loading  
+The transformed data is then loaded into a PostgreSQL database for analysis. The data is sorted in descending order by datetime to facilitate analysis and visualization. The PostgreSQL database can be accessed using tools such as Beaver or other SQL clients.  
+![image](https://user-images.githubusercontent.com/117455557/229133515-f30d54b4-e8cf-42ee-9e6f-19e9d3e1a572.png)  
+
+## Setting up the Environment  
 1. Open the docker-compose.yaml file and go to the "services" section to find the PostgreSQL section.  
 
 2. Under the volumes section, enter ports: -5432:5432. The modified section should look like this  
