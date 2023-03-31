@@ -38,5 +38,3 @@ services:
    set both Login and Password to "airflow"; Port = 5432
 
 10. After everything is setup, click test and see if it is success.
-
-link: https://www.youtube.com/watch?v=S1eapG6gjLU&list=LL&index=1
