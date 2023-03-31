@@ -1,4 +1,4 @@
-# ETL pipeline for Web3 data  
+# Data_pipeline_Ethereum_token   
 
 This project is designed to extract ERC20 token data from Web3 using the Etherscan API and create an ETL pipeline using Apache Airflow. The extracted data is scheduled to be fed into a local PostgreSQL database daily. The project involves technologies such as Docker, Airflow DAGs, PostgreSQL, and HDFS. Below is the screenshot of the data pipeline in action.  
 ![image](https://user-images.githubusercontent.com/117455557/229133404-fe19a6b3-2545-4a31-b340-9726900ca8a7.png)  
@@ -12,6 +12,11 @@ Once the data is extracted, it is transformed using a series of tasks to clean, 
 ## Loading  
 The transformed data is then loaded into a PostgreSQL database for analysis. The data is sorted in descending order by datetime to facilitate analysis and visualization. The PostgreSQL database can be accessed using tools such as Beaver or other SQL clients.  
 ![image](https://user-images.githubusercontent.com/117455557/229133515-f30d54b4-e8cf-42ee-9e6f-19e9d3e1a572.png)  
+
+## Requirements  
+- Docker installed on your machine  
+- An Airflow installation (you can use the official Apache Airflow Docker image)  
+- A PostgreSQL database (or another database supported by Airflow)  
 
 ## Setting up the Environment  
 1. Open the docker-compose.yaml file and go to the "services" section to find the PostgreSQL section.  
@@ -40,3 +45,6 @@ The transformed data is then loaded into a PostgreSQL database for analysis. The
 - Port: 5432  
 
 10. After setting up everything, click the "Test Connection" button to check if it is successful.  
+
+## Usage  
+Once the containers are running, you can use the Airflow UI to manage and monitor the pipeline. The pipeline consists of several DAGs, each of which represents a different step in the process. You can use the UI to trigger DAG runs, monitor task progress, and view logs.  
