@@ -1,4 +1,4 @@
-# Data_pipeline_Ethereum_token   
+# Data_Pipeline_Ethereum_Token   
 
 This project is designed to extract ERC20 token data from Web3 using the Etherscan API and create an ETL pipeline using Apache Airflow. The extracted data is scheduled to be fed into a local PostgreSQL database daily. The project involves technologies such as Docker, Airflow DAGs, PostgreSQL, and HDFS. Below is the screenshot of the data pipeline in action.  
 ![image](https://user-images.githubusercontent.com/117455557/229133404-fe19a6b3-2545-4a31-b340-9726900ca8a7.png)  
