@@ -1,40 +1,31 @@
-1. Open the yaml file, go to "services" section and find the postgres section
+# ETL pipeline for Web3 data  
 
-2. Under the volumes section, enter ports: -5432:5432. Please see below
+This project is designed to extract ERC20 token data from Web3 using the Etherscan API and create an ETL pipeline using Apache Airflow. The extracted data is scheduled to be fed into a local PostgreSQL database daily. The project involves technologies such as Docker, Airflow DAGs, PostgreSQL, and HDFS.  
 
-services:
-  postgres:
-    image: postgres:13
-    environment:
-      POSTGRES_USER: airflow
-      POSTGRES_PASSWORD: airflow
-      POSTGRES_DB: airflow
-    volumes:
-      - postgres-db-volume:/var/lib/postgresql/data
-    ports:
-      - 5432:5432
-    healthcheck:
-      test: ["CMD", "pg_isready", "-U", "airflow"]
-      interval: 10s
-      retries: 5
-      start_period: 5s
-    restart: always
+# Setting up the Environment  
+1. Open the docker-compose.yaml file and go to the "services" section to find the PostgreSQL section.  
 
-3. Run in the command "docker-compose up airflow-init"
+2. Under the volumes section, enter ports: -5432:5432. The modified section should look like this  
+![image](https://user-images.githubusercontent.com/117455557/229131423-87556da8-eacd-4994-83ec-144a5c10018e.png)  
 
-4. Run in the command "docker-compose up" (keep this terminal as it is, the terminal will run constantly as it is refreshing your system)
-   Note: you can also just run "docker-compose up -d --nodeps --build postgres" if the image is already set up and you only need to change the postgre section.
+3. Run the command docker-compose up airflow-init in the terminal.  
 
-5. Go to windows app "beaver" and add a PostgreSQL server
+4. Run the command docker-compose up in the same terminal. This command keeps the terminal running and refreshing your system. Alternatively, if the PostgreSQL image is already set up and you only need to change the PostgreSQL section, you can run docker-compose up -d --nodeps --build postgres.  
 
-6. Set username and password both as airflow for the PostgreSQL server
+5. Go to the "Beaver" Windows app and add a PostgreSQL server.  
 
-7. Add a database in PostgreSQL by clicking the right button in the database section (in this case we set us erc20_database)
+6. Set the username and password for the PostgreSQL server as "airflow".  
 
-8. Go to airflow UI -> Admin -> Connections -> + (Add Connection)
+7. Add a database in PostgreSQL by clicking the right button in the database section. In this case, we named the database "erc20_database".  
 
-9. Connection Id = eth_localhost (make sure your dag postgres_conn_id matches the connection id here); Connection Type = Postgres;
-   Host = host.docker.internal; Schema = erc20_database (make sure the Schema name matches the database name you added on step 7);
-   set both Login and Password to "airflow"; Port = 5432
+8. Go to the Airflow UI, select "Admin" -> "Connections" -> "+ (Add Connection)".  
 
-10. After everything is setup, click test and see if it is success.
+9. In the "Add Connection" form, fill in the following details:  
+- Connection Id: eth_localhost (make sure the DAG postgres_conn_id matches this connection ID).
+- Connection Type: Postgres
+- Host: host.docker.internal
+- Schema: erc20_database (make sure the schema name matches the database name you added in step 7).
+- Login and Password: both set to "airflow"
+- Port: 5432  
+
+10. After setting up everything, click the "Test Connection" button to check if it is successful.  
